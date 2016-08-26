@@ -7,7 +7,7 @@ var methodOverride = require("method-override");
 var flash = require("connect-flash");
 var passport = require('passport');
 var expressSession = require("express-session");
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
 
 
 //DB
