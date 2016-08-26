@@ -1,5 +1,5 @@
 if(localStorage.history){
-             var testUrl = "https://fcc-back-end-2-michaelzap94.c9users.io/location?term="+localStorage.history+"&radius="+localStorage.radius;
+             var testUrl = "/location?term="+localStorage.history+"&radius="+localStorage.radius;
              var input = $("#searchText[type='text']").val(localStorage.history);
 
                 

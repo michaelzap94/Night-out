@@ -86,7 +86,7 @@
                 localStorage.setItem("history",input.toString());
                 localStorage.setItem("radius",30000);
 
-                var testUrl = "https://fcc-back-end-2-michaelzap94.c9users.io/location?term="+input.toString();
+                var testUrl = "/location?term="+input.toString();
                 
                  sendAjax(testUrl);//calls the function sendAjax.
             }
@@ -95,7 +95,7 @@
     $("#nearEvents").on("click",function(e){
         e.preventDefault();
         $("#searchText[type='text']").val("pub");
-        var testUrl = "https://fcc-back-end-2-michaelzap94.c9users.io/location?radius=5000";
+        var testUrl = "/location?radius=5000";
         localStorage.history = "pub";
         localStorage.radius = 5000;
 
