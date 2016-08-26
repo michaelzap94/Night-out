@@ -23,7 +23,7 @@ require('./config/passport')(passport); // pass passport for configuration
 
 
 
-	app.use(express.logger('dev'));
+	//app.use(express.logger('dev'));
     app.use(express.cookieParser()); 
 	app.use(express.bodyParser());
     app.use(bodyParser.urlencoded({extended:true}));
