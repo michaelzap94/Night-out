@@ -22,7 +22,7 @@ module.exports = function(passport) {
 
         consumerKey     : process.env.CONSUMERKEY,
         consumerSecret  : process.env.CONSUMERSECRET,
-        callbackURL     : 'https://fcc-back-end-2-michaelzap94.c9users.io/auth/twitter/callback'
+        callbackURL     : '/auth/twitter/callback'
 
     },
     function(token, tokenSecret, profile, done) {

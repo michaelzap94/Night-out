@@ -22,7 +22,6 @@ require('./config/passport')(passport); // pass passport for configuration
 // configuration ===============================================================
 
 
-app.configure(function() {
 
 	app.use(express.logger('dev'));
     app.use(express.cookieParser()); 
@@ -43,7 +42,7 @@ app.configure(function() {
     app.use(passport.session());
 
 	app.use(flash()); 
-});
+
 
 
 //EVERY FUNCTION USED IN app.use WILL BE USED IN EVERY SINGLE ROUTE.
