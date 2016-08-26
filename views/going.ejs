@@ -1,0 +1,117 @@
+<% include ./partials/header.ejs %>
+    
+
+<div id="myContainerId" class="container">
+        <div  class="sectionClass container">
+                 <span class="fa-stack fa-4x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i  class="fa fa-moon-o fa-stack-1x"></i>
+                </span>
+                <span class="fa-stack fa-4x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i  class="fa fa-glass fa-stack-1x"></i>
+                </span>
+                 <span class="fa-stack fa-4x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i  class="fa fa-taxi fa-stack-1x"></i>
+                </span>
+                <h2 class="barsGoingHeader" >Bars you are going to:</h2>
+               
+        </div>
+    <div id="listContainer" class="container">
+        
+        <div id="loader" style="display:none"></div>
+
+        
+        <ul id="listEntries">
+            
+          <%if(currentUser){
+             for(var i=0;i<currentUser.goingValue.length;i++){
+          %>
+              
+           <a href='<%=currentUser.goingValue[i].link%>' target="_blank">
+               <li class='service-list'>
+                   <span class='myimg'>
+                       <img src='<%=currentUser.goingValue[i].imgUrl%>' height='100' width='100' onerror='if (this.src != "https://www.nattynutrition.com/layout/images/NoPhotoDefault.png?1298563334") this.src = "http://www.nattynutrition.com/layout/images/NoPhotoDefault.png?1298563334"'  />
+                   </span>
+                   
+                   <span class='title'><strong><%=currentUser.goingValue[i].displayBarName%></strong></span><p><%=currentUser.goingValue[i].text%></p>
+                   <div id='div<%=currentUser.goingValue[i].barName%>' class='formButtons'>
+                       <span>Going <i class="fa fa-check-circle-o fa-lg"></i> </span>
+                       <button id="<%=currentUser.goingValue[i].barName%>" class="noBtn btn btn-warning btn-xs" value="0<%=currentUser.goingValue[i].barName%>">Not Anymore</button>
+                   </div>
+               </li>
+           </a>
+          <% } } %>
+
+       
+        </ul>
+    </div>
+    <div class="container">
+        <footer style="position:relative" class="text-center">
+        <hr/>
+        <p>Written and Coded by <a href="https://www.freecodecamp.com/michaelzap94" target="_blank">Michael Zapata</a>.</p>
+    </footer>
+    </div>
+     
+
+</div>
+<script>
+     
+     function sendAjax(value,userId,barName,myThis){
+        
+        
+         var myData = {
+             valueGoing:value,
+             userId:userId,
+             barName:barName
+         };
+         
+         $.ajax({
+                    url: '/deletegoing', // form action url
+                    type: 'POST', // form submit method get/post
+                    dataType: 'json', // request type html/json/xml
+                    data: myData, // serialize form data
+                    beforeSend: function() {
+                    },
+                    success: function(data) {
+                        myThis.parent().parent().fadeOut(200,function(){
+                        myThis.parent().parent().html("");
+                        });
+                        
+                    },
+                    error: function(e) {
+                        console.log(e)
+                    }
+                });
+         
+     }
+     
+<% if(currentUser){ %>
+var userId = "<%- currentUser.id %>";
+<% }else{ %>
+var userId = null;
+<% }%>
+            
+        $('#listEntries').on('click',".noBtn",function(e){
+            
+            e.preventDefault(); 
+            
+            //check if userId is logged in when clicking button going, if so, save data in database otherwise redirect him to the log in page.
+          if(userId){
+              //total is the String value+name, so separate them.
+          var total = $(this).val();
+          var value = total.substring(0, 1);
+          var barName = total.substring(1);
+          
+          sendAjax(value,userId,barName,$(this));  
+          
+          }else{
+          location.href = "/auth/twitter"; 
+          }
+        });
+        
+
+     </script>
+     
+<% include ./partials/footer.ejs %>
