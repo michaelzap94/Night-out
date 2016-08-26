@@ -7,6 +7,8 @@ var methodOverride = require("method-override");
 var flash = require("connect-flash");
 var passport = require('passport');
 var expressSession = require("express-session");
+var cookieParser = require('cookie-parser')
+
 
 //DB
 var dburl = process.env.DATABASEURL || "mongodb://localhost/nigthout";
@@ -24,8 +26,7 @@ require('./config/passport')(passport); // pass passport for configuration
 
 
 	//app.use(express.logger('dev'));
-    app.use(express.cookieParser()); 
-	app.use(express.bodyParser());
+    app.use(cookieParser()); 
     app.use(bodyParser.urlencoded({extended:true}));
     app.set("view engine", "ejs");
     app.use(express.static(__dirname + "/public"));
